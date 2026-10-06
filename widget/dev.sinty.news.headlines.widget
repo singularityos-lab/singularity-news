@@ -1,0 +1,8 @@
+[Widget]
+Id=news.headlines
+ProviderId=dev.sinty.news
+Name=Headlines
+IconName=dev.sinty.news
+Sizes=2x2;4x2;4x4
+Module=libsingularity-news-widget.so
+ModuleSymbol=singularity_news_widget_new

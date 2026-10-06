@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Example &amp; Co. Blog</title>
+    <link>https://blog.example.com/</link>
+    <atom:link href="https://blog.example.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes from the example team</description>
+    <item>
+      <title>Release 2.0 is out</title>
+      <link>https://blog.example.com/2024/release-2</link>
+      <guid isPermaLink="false">tag:example.com,2024:release-2</guid>
+      <pubDate>Tue, 05 Mar 2024 14:30:00 +0100</pubDate>
+      <dc:creator>Ada Lovelace</dc:creator>
+      <description>Short summary</description>
+      <content:encoded><![CDATA[<p>We shipped <b>2.0</b>.</p><img src="/img/hero.png" width="800"><script>alert(1)</script>]]></content:encoded>
+    </item>
+    <item>
+      <title>Photo of the day</title>
+      <link>posts/photo</link>
+      <guid>https://blog.example.com/posts/photo</guid>
+      <pubDate>Mon, 4 Mar 24 08:00:00 GMT</pubDate>
+      <description>&lt;p&gt;A &lt;i&gt;lovely&lt;/i&gt; view&lt;/p&gt;</description>
+      <media:thumbnail url="https://cdn.example.com/thumb.jpg"/>
+    </item>
+    <item>
+      <description>Untitled note without link or guid</description>
+      <pubDate>Sun, 03 Mar 2024 10:00:00 EST</pubDate>
+    </item>
+    <item>
+      <title>Podcast episode</title>
+      <link>https://blog.example.com/ep1</link>
+      <enclosure url="https://cdn.example.com/cover.jpg" type="image/jpeg" length="1000"/>
+    </item>
+  </channel>
+</rss>

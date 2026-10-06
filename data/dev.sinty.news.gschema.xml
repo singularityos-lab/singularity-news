@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="dev.sinty.news" path="/dev/sinty/news/">
+    <key name="refresh-minutes" type="i">
+      <default>30</default>
+      <range min="5" max="1440"/>
+      <summary>Check for new articles</summary>
+      <description>Minutes between automatic updates.</description>
+    </key>
+    <key name="mark-read-on-open" type="b">
+      <default>true</default>
+      <summary>Mark as read when opened</summary>
+      <description>Mark an article as read as soon as it is shown.</description>
+    </key>
+    <key name="keep-read" type="s">
+      <choices>
+        <choice value="week"/>
+        <choice value="month"/>
+        <choice value="three-months"/>
+        <choice value="forever"/>
+      </choices>
+      <default>'month'</default>
+      <summary>Keep read articles</summary>
+      <description>How long read articles are kept. Unread and starred articles are always kept.</description>
+    </key>
+    <key name="muted-words" type="as">
+      <default>[]</default>
+      <summary>Muted words</summary>
+      <description>Words, phrases or patterns that mute an article. Entries start with text:, word: or regex: to choose how they match.</description>
+    </key>
+    <key name="muted-action" type="s">
+      <choices>
+        <choice value="hide"/>
+        <choice value="dim"/>
+      </choices>
+      <default>'hide'</default>
+      <summary>Muted articles</summary>
+      <description>Hide muted articles, or dim them and reveal them when selected.</description>
+    </key>
+    <key name="saved-limit-mb" type="i">
+      <default>250</default>
+      <range min="10" max="10000"/>
+      <summary>Space for saved articles</summary>
+      <description>Megabytes kept for articles saved for later. The oldest ones are removed when the limit is reached.</description>
+    </key>
+    <key name="last-seen" type="x">
+      <default>0</default>
+      <summary>Last look at the articles</summary>
+      <description>When the News window was last in front, as a Unix time. Articles fetched later count as new on the dock icon.</description>
+    </key>
+  </schema>
+</schemalist>

@@ -1,0 +1,53 @@
+{
+    "schema-id": "dev.sinty.news",
+    "settings": [
+        {
+            "key": "refresh-minutes",
+            "label": "Check for New Articles (minutes)",
+            "subtitle": "Minutes between automatic updates",
+            "type": "int",
+            "widget": "spin",
+            "min": 5,
+            "max": 1440
+        },
+        {
+            "key": "mark-read-on-open",
+            "label": "Mark as Read When Opened",
+            "type": "boolean",
+            "widget": "toggle"
+        },
+        {
+            "key": "keep-read",
+            "label": "Keep Read Articles",
+            "subtitle": "Unread and starred articles are always kept",
+            "type": "string",
+            "widget": "combo",
+            "options": [
+                { "id": "week", "label": "One Week" },
+                { "id": "month", "label": "One Month" },
+                { "id": "three-months", "label": "Three Months" },
+                { "id": "forever", "label": "Forever" }
+            ]
+        },
+        {
+            "key": "muted-action",
+            "label": "Muted Articles",
+            "subtitle": "Choose the muted words from Edit, Muted Words in News",
+            "type": "string",
+            "widget": "combo",
+            "options": [
+                { "id": "hide", "label": "Hide Them" },
+                { "id": "dim", "label": "Dim Them", "subtitle": "Select a dimmed article to read it" }
+            ]
+        },
+        {
+            "key": "saved-limit-mb",
+            "label": "Space for Saved Articles (MB)",
+            "subtitle": "The oldest saved articles are removed when it runs out",
+            "type": "int",
+            "widget": "spin",
+            "min": 10,
+            "max": 10000
+        }
+    ]
+}

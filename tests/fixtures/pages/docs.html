@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Rotating log files without losing lines</title></head>
+<body>
+<div class="layout">
+  <div class="toc">
+    <p>On this page</p>
+    <ul>
+      <li><a href="#why">Why rotation loses lines</a></li>
+      <li><a href="#copy">Copy and truncate</a></li>
+      <li><a href="#reopen">Reopen on signal</a></li>
+    </ul>
+  </div>
+  <section class="prose">
+    <h1>Rotating log files without losing lines</h1>
+    <p>When a service writes to a log file that another program renames or truncates, a few lines can go missing, or end up in the wrong file. This guide explains why that happens and shows two approaches that avoid it.</p>
+    <h2 id="why">Why rotation loses lines</h2>
+    <p>A process keeps writing to the file descriptor it opened at startup. If the file is renamed, writes continue to land in the renamed file, so the new file stays empty until the service is restarted, which surprises many administrators.</p>
+    <h2 id="copy">Copy and truncate</h2>
+    <p>The simplest method copies the file and then truncates the original in place. It works with any service, but anything written between the copy and the truncation is lost, so it is only suitable for logs where a small gap is acceptable.</p>
+    <pre>cp app.log app.log.1
+: &gt; app.log</pre>
+    <h2 id="reopen">Reopen on signal</h2>
+    <p>The safer method renames the file and then asks the service to reopen its log, usually with a signal. Nothing is lost, because the service only switches files once it has finished writing the current line.</p>
+    <table><tr><th>Method</th><th>Loses lines</th></tr><tr><td>Copy and truncate</td><td>Sometimes</td></tr><tr><td>Reopen on signal</td><td>Never</td></tr></table>
+  </section>
+  <div class="pager"><a href="/guides/permissions">Previous: File permissions</a> <a href="/guides/backups">Next: Backups</a></div>
+</div>
+</body>
+</html>

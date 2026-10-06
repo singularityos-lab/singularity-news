@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:base="https://atom.example.net/blog/">
+  <title type="html">Atom &lt;b&gt;Weblog&lt;/b&gt;</title>
+  <subtitle>Things we write</subtitle>
+  <link rel="self" href="https://atom.example.net/blog/atom.xml"/>
+  <link rel="alternate" type="text/html" href="https://atom.example.net/blog/"/>
+  <updated>2024-01-20T12:00:00Z</updated>
+  <author><name>Feed Author</name></author>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <entry>
+    <title>First entry</title>
+    <link rel="alternate" href="2024/first"/>
+    <link rel="enclosure" type="audio/mpeg" href="https://atom.example.net/a.mp3"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <published>2024-01-19T10:00:00-05:00</published>
+    <updated>2024-01-20T10:00:00Z</updated>
+    <author><name>Grace Hopper</name></author>
+    <summary>Summary text</summary>
+    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>Hello <a href="more">world</a></p></div></content>
+  </entry>
+  <entry>
+    <title type="text">Plain &amp; simple</title>
+    <link href="https://atom.example.net/second"/>
+    <id>tag:atom.example.net,2024:second</id>
+    <updated>2024-01-18T08:30:00.123+00:00</updated>
+    <summary type="text">Line one
+
+Line two &lt;not a tag&gt;</summary>
+    <media:group><media:content url="https://atom.example.net/pic.jpg" medium="image"/></media:group>
+  </entry>
+  <entry>
+    <title type="html">&lt;em&gt;Escaped&lt;/em&gt; HTML</title>
+    <link href="https://atom.example.net/third"/>
+    <id>tag:atom.example.net,2024:third</id>
+    <updated>2024-01-17T08:30:00Z</updated>
+    <content type="html">&lt;p&gt;Body with &lt;img src="https://atom.example.net/t.png"&gt;&lt;/p&gt;</content>
+  </entry>
+</feed>

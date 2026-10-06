@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=News
+Comment=Read the latest from your favorite sites
+Exec=singularity-news %U
+Icon=dev.sinty.news
+Terminal=false
+Type=Application
+Categories=Network;Feed;News;
+MimeType=text/x-opml+xml;x-scheme-handler/feed;
+Keywords=rss;atom;feed;news;reader;opml;subscribe;
+StartupWMClass=dev.sinty.news
+Actions=add-feed;
+
+[Desktop Action add-feed]
+Name=Add Feed
+Exec=singularity-news --add-feed

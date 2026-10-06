@@ -1,0 +1,25 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "JSON Journal",
+  "home_page_url": "https://json.example.com/",
+  "feed_url": "https://json.example.com/feed.json",
+  "authors": [{ "name": "Feed Writer" }],
+  "items": [
+    {
+      "id": "2",
+      "url": "https://json.example.com/2",
+      "title": "HTML item",
+      "content_html": "<p>Rich <strong>content</strong></p>",
+      "date_published": "2024-04-01T11:00:00+02:00",
+      "image": "/images/2.png",
+      "authors": [{ "name": "Alan Turing" }, { "name": "Kurt Gödel" }]
+    },
+    {
+      "id": 1,
+      "url": "https://json.example.com/1",
+      "content_text": "Plain text body\nwith a <tag>",
+      "date_modified": "2024-03-31T09:00:00Z"
+    },
+    "not an object"
+  ]
+}

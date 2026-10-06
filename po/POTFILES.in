@@ -1,0 +1,14 @@
+src/app.vala
+src/window.vala
+src/dialogs.vala
+src/rows.vala
+src/article_view.vala
+src/feed.vala
+src/html.vala
+src/opml.vala
+src/fetcher.vala
+src/extract.vala
+src/mute.vala
+src/saved.vala
+src/search.vala
+widget/headlines_widget.vala
