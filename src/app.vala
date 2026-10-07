@@ -116,6 +116,7 @@ namespace Singularity.Apps.News {
             v1.append (_("Next Article"), "win.next");
             v1.append (_("Previous Article"), "win.previous");
             v1.append (_("Open in Browser"), "win.open-browser");
+            v1.append (_("Share…"), "win.share");
             v1.append (_("Show Full Article"), "win.full-article");
             view.append_section (null, v1);
             var v2 = new GLib.Menu ();

@@ -378,6 +378,7 @@ namespace Singularity.Apps.News {
             enable_action ("toggle-star", has && !copy);
             enable_action ("save-later", has && !saving);
             enable_action ("open-browser", has && current.link != "");
+            enable_action ("share", has && current.link != "");
             enable_action ("full-article", has && !copy && current.link != "");
         }
 
@@ -1181,7 +1182,7 @@ namespace Singularity.Apps.News {
         }
 
         private void install_actions () {
-            string[] names = { "add", "import", "export", "new-folder", "refresh", "mark-all-read", "toggle-read", "toggle-star", "open-browser", "find", "next", "previous", "sidebar", "save-later", "muted-words", "full-article", "show-saved", "close" };
+            string[] names = { "add", "import", "export", "new-folder", "refresh", "mark-all-read", "toggle-read", "toggle-star", "open-browser", "share", "find", "next", "previous", "sidebar", "save-later", "muted-words", "full-article", "show-saved", "close" };
             foreach (string n in names) {
                 var a = new SimpleAction (n, null);
                 string name = n;
@@ -1196,6 +1197,7 @@ namespace Singularity.Apps.News {
                         case "toggle-read": toggle_read (); break;
                         case "toggle-star": toggle_star (); break;
                         case "open-browser": open_in_browser (); break;
+                        case "share": if (current != null && current.link != "") Singularity.Share.uris (this, { current.link }, current.title); break;
                         case "find": if (store.feeds.size > 0) search.grab_focus_entry (); break;
                         case "next": move (1); break;
                         case "previous": move (-1); break;
