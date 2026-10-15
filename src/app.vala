@@ -133,7 +133,7 @@ namespace Singularity.Apps.News {
 
             var quit = new SimpleAction ("quit", null);
             quit.activate.connect (() => {
-                foreach (var w in get_windows ()) w.close ();
+                foreach (var w in get_windows ().copy ()) w.close ();
             });
             add_action (quit);
             var open_article_action = new SimpleAction ("open-article", VariantType.STRING);
