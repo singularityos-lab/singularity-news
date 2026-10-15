@@ -52,7 +52,7 @@ namespace Singularity.Apps.News {
             if (last_modified != "") h.replace ("If-Modified-Since", last_modified);
             Bytes bytes;
             try {
-                bytes = yield session.send_and_read_async (msg, Priority.DEFAULT, cancel);
+                bytes = yield read_limited (session, msg, MAX_BYTES, Priority.DEFAULT, cancel);
             } catch (IOError.CANCELLED e) {
                 throw e;
             } catch (Error e) {
@@ -87,7 +87,7 @@ namespace Singularity.Apps.News {
             msg.request_headers.replace ("Accept", "text/html, application/xhtml+xml;q=0.9, */*;q=0.5");
             Bytes bytes;
             try {
-                bytes = yield session.send_and_read_async (msg, Priority.DEFAULT, cancel);
+                bytes = yield read_limited (session, msg, MAX_BYTES, Priority.DEFAULT, cancel);
             } catch (IOError.CANCELLED e) {
                 throw e;
             } catch (Error e) {
@@ -99,11 +99,28 @@ namespace Singularity.Apps.News {
             return Extract.decode (bytes, msg.response_headers.get_one ("Content-Type") ?? "");
         }
 
+        public static async Bytes read_limited (Soup.Session session, Soup.Message msg, int64 max, int priority, Cancellable? cancel) throws Error {
+            var stream = yield session.send_async (msg, priority, cancel);
+            var buf = new ByteArray ();
+            var chunk = new uint8[65536];
+            while (true) {
+                ssize_t n = yield stream.read_async (chunk, priority, cancel);
+                if (n <= 0) break;
+                buf.append (chunk[0:(int) n]);
+                if (buf.len > max) break;
+            }
+            try {
+                yield stream.close_async (priority, null);
+            } catch (Error e) {
+            }
+            return ByteArray.free_to_bytes ((owned) buf);
+        }
+
         public static string bytes_to_string (Bytes bytes) {
             var arr = new uint8[bytes.get_size () + 1];
             Memory.copy (arr, bytes.get_data (), bytes.get_size ());
             arr[bytes.get_size ()] = 0;
-            return (string) arr;
+            return ((string) arr).make_valid ();
         }
 
         private bool try_parse (FetchResult f, Resolution res) {

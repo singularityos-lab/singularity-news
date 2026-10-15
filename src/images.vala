@@ -90,7 +90,7 @@ namespace Singularity.Apps.News {
             try {
                 var msg = new Soup.Message ("GET", url);
                 if (msg != null) {
-                    var bytes = yield session.send_and_read_async (msg, Priority.LOW, cancel);
+                    var bytes = yield Fetcher.read_limited (session, msg, 24 * 1024 * 1024, Priority.LOW, cancel);
                     if (msg.status_code >= 200 && msg.status_code < 300 && bytes.get_size () > 0 && bytes.get_size () < 24 * 1024 * 1024) {
                         try {
                             yield file.replace_contents_async (bytes.get_data (), null, false, FileCreateFlags.REPLACE_DESTINATION, null, null);
@@ -122,7 +122,7 @@ namespace Singularity.Apps.News {
             try {
                 int w, h;
                 var fmt = yield Gdk.Pixbuf.get_file_info_async (path, cancel, out w, out h);
-                if (fmt == null || w <= 0 || h <= 0) throw new IOError.INVALID_DATA ("unknown image");
+                if (fmt == null || w <= 0 || h <= 0 || (int64) w * h > 100000000) throw new IOError.INVALID_DATA ("unknown image");
                 double scale = cover ? (double) size / int.min (w, h) : (double) size / int.max (w, h);
                 if (scale > 1) scale = 1;
                 int tw = int.max (1, (int) (w * scale)), th = int.max (1, (int) (h * scale));
