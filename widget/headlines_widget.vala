@@ -104,12 +104,11 @@ namespace SingularityNewsWidget {
             int gen = ++generation;
             string base_dir = dir;
             int max = limit;
-            new Thread<void> ("news-headlines", () => {
+            Async.dispatch(this, Async.Qos.USER, (c) => {
                 var found = load (base_dir, max);
-                Idle.add (() => {
+                return () => {
                     if (gen == generation) show (found);
-                    return Source.REMOVE;
-                });
+                };
             });
         }
 
