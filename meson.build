@@ -32,7 +32,7 @@ resources = gnome.compile_resources(
 core_sources = files('src/feed.vala', 'src/html.vala', 'src/discovery.vala', 'src/opml.vala', 'src/store.vala', 'src/fetcher.vala', 'src/extract.vala', 'src/mute.vala', 'src/saved.vala')
 
 executable('singularity-news',
-  core_sources + files('src/images.vala', 'src/article_view.vala', 'src/rows.vala', 'src/dialogs.vala', 'src/window.vala', 'src/search.vala', 'src/app.vala') + [resources],
+  core_sources + files('src/images.vala', 'src/article_view.vala', 'src/rows.vala', 'src/dialogs.vala', 'src/window.vala', 'src/search.vala', 'src/agent_intents.vala', 'src/app.vala') + [resources],
   dependencies: [gtk_dep, gee_dep, soup_dep, json_dep, xml_dep, libsingularity_dep],
   install: true
 )

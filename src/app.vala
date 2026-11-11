@@ -60,6 +60,7 @@ namespace Singularity.Apps.News {
             refresher = new Refresher (store);
             saved = new SavedStore (SavedStore.default_dir ());
             saved.load ();
+            NewsIntents.install (this);
             saved.limit_bytes = (int64) settings.get_int ("saved-limit-mb") * 1000 * 1000;
             foreach (var s in saved.items) ImageCache.get_default ().register_local (saved.local_images (s));
             full_text = new FullText (refresher.fetcher);
