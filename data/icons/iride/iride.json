@@ -1,0 +1,299 @@
+{
+ "format": 1,
+ "canvas": [
+  236,
+  236
+ ],
+ "box": [
+  0,
+  0,
+  196,
+  200
+ ],
+ "stack": [
+  {
+   "layer": "layers/000.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/001.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/002.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/003.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/004.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/005.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/006.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/007.svg",
+   "piece": "newspaper"
+  },
+  {
+   "rim": "M54 58 H188 Q196 58 196 66 V188 Q196 196 188 196 H54 Q46 196 46 188 V66 Q46 58 54 58 Z",
+   "light": [
+    46.0,
+    58.0,
+    196.0,
+    196.0
+   ],
+   "piece": "newspaper"
+  },
+  {
+   "clip": "M54 58 H188 Q196 58 196 66 V188 Q196 196 188 196 H54 Q46 196 46 188 V66 Q46 58 54 58 Z",
+   "stack": [
+    {
+     "layer": "layers/008.svg",
+     "piece": "newspaper"
+    }
+   ]
+  },
+  {
+   "layer": "layers/009.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/010.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/011.svg",
+   "piece": "newspaper"
+  },
+  {
+   "layer": "layers/012.svg",
+   "piece": "wave-near"
+  },
+  {
+   "layer": "layers/013.svg",
+   "piece": "wave-far"
+  },
+  {
+   "layer": "layers/014.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/015.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/016.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/017.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/018.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/019.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/020.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/021.svg",
+   "piece": "lines"
+  },
+  {
+   "layer": "layers/022.svg",
+   "piece": "lines"
+  }
+ ],
+ "motion": [
+  {
+   "piece": "newspaper",
+   "origin": [
+    109.0,
+    113.0
+   ],
+   "tracks": [
+    {
+     "kind": "scale",
+     "from": [
+      0.15,
+      0.15
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "spring"
+    },
+    {
+     "kind": "rotate",
+     "from": [
+      -720
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "out"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      1
+     ],
+     "at": 840,
+     "duration": 75,
+     "ease": "linear"
+    }
+   ]
+  },
+  {
+   "piece": "wave-near",
+   "origin": [
+    109.0,
+    113.0
+   ],
+   "tracks": [
+    {
+     "kind": "scale",
+     "from": [
+      0.15,
+      0.15
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "spring"
+    },
+    {
+     "kind": "rotate",
+     "from": [
+      -720
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "out"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      1.9
+     ],
+     "at": 540,
+     "duration": 40,
+     "ease": "linear"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      0.1
+     ],
+     "at": 580,
+     "duration": 60,
+     "ease": "linear"
+    }
+   ]
+  },
+  {
+   "piece": "wave-far",
+   "origin": [
+    109.0,
+    113.0
+   ],
+   "tracks": [
+    {
+     "kind": "scale",
+     "from": [
+      0.15,
+      0.15
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "spring"
+    },
+    {
+     "kind": "rotate",
+     "from": [
+      -720
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "out"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      1.9
+     ],
+     "at": 600,
+     "duration": 40,
+     "ease": "linear"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      0.1
+     ],
+     "at": 640,
+     "duration": 80,
+     "ease": "linear"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      1.9
+     ],
+     "at": 720,
+     "duration": 40,
+     "ease": "linear"
+    },
+    {
+     "kind": "opacity",
+     "from": [
+      0.1
+     ],
+     "at": 760,
+     "duration": 80,
+     "ease": "linear"
+    }
+   ]
+  },
+  {
+   "piece": "lines",
+   "origin": [
+    109.0,
+    113.0
+   ],
+   "tracks": [
+    {
+     "kind": "scale",
+     "from": [
+      0.15,
+      0.15
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "spring"
+    },
+    {
+     "kind": "rotate",
+     "from": [
+      -720
+     ],
+     "at": 0,
+     "duration": 520,
+     "ease": "out"
+    }
+   ]
+  }
+ ]
+}

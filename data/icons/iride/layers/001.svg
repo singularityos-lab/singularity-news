@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="236" height="236" viewBox="0 0 236 236" fill="none"><defs><linearGradient id="sheet_front" x1="30" y1="36" x2="160" y2="170" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="#f3eee2" />
+<stop offset="100%" stop-color="#d8cfbb" />
+</linearGradient>
+</defs><g transform="rotate(-9 100 104)"><path d="M40 37 H162 Q170 37 170 45 V167 Q170 175 162 175 H40 Q32 175 32 167 V45 Q32 37 40 37 Z" fill="url(#sheet_front)" />
+</g></svg>

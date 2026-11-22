@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="236" height="236" viewBox="0 0 236 236" fill="none"><defs><linearGradient id="paper_mid" x1="46" y1="58" x2="196" y2="200" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="#d9cfbb" />
+<stop offset="100%" stop-color="#b3a58a" />
+</linearGradient>
+</defs><path d="M54 60 H188 Q196 60 196 68 V190 Q196 198 188 198 H54 Q46 198 46 190 V68 Q46 60 54 60 Z" fill="url(#paper_mid)" />
+</svg>
