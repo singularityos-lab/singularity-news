@@ -80,6 +80,7 @@ namespace Singularity.Apps.News {
             set_content (stack);
 
             search = add_bubble_search (_("Search Articles"), (t) => {
+                if (t.strip () == query) return;
                 query = t.strip ();
                 schedule_rebuild ();
             });
@@ -1165,6 +1166,59 @@ namespace Singularity.Apps.News {
             if (search.text != "") search.text = "";
             query = "";
             select_source ("feed:" + a.feed_id);
+            show_article (a);
+            rebuild_list ();
+        }
+
+        public Variant save_migration () {
+            var d = new VariantDict ();
+            d.insert_value ("source", new Variant.string (source));
+            d.insert_value ("query", new Variant.string (search.text));
+            d.insert_value ("article", new Variant.string (current != null ? current.key : ""));
+            d.insert_value ("show-muted", new Variant.boolean (show_muted));
+            var keys = new Gee.ArrayList<string> ();
+            keys.add_all (revealed);
+            keys.sort ((a, b) => strcmp (a, b));
+            d.insert_value ("revealed", new Variant.strv (keys.to_array ()));
+            var choices = new VariantBuilder (new VariantType ("a{sb}"));
+            foreach (var e in full_choice.entries) choices.add ("{sb}", e.key, e.value);
+            d.insert_value ("full", choices.end ());
+            return d.end ();
+        }
+
+        public void restore_migration (Variant data) {
+            var d = new VariantDict (data);
+            string wanted = (d.lookup_value ("source", VariantType.STRING) ?? new Variant.string ("all")).get_string ();
+            source = rows.has_key (wanted) ? wanted : "all";
+            foreach (var e in rows.entries) e.value.set_active (e.key == source);
+            show_muted = (d.lookup_value ("show-muted", VariantType.BOOLEAN) ?? new Variant.boolean (false)).get_boolean ();
+            show_muted_action.set_state (new Variant.boolean (show_muted));
+            revealed.clear ();
+            foreach (string k in (d.lookup_value ("revealed", VariantType.STRING_ARRAY) ?? new Variant.strv ({})).get_strv ()) revealed.add (k);
+            full_choice.clear ();
+            var choices = d.lookup_value ("full", new VariantType ("a{sb}"));
+            if (choices != null) {
+                var it = choices.iterator ();
+                string k;
+                bool v;
+                while (it.next ("{sb}", out k, out v)) full_choice[k] = v;
+            }
+            string text = (d.lookup_value ("query", VariantType.STRING) ?? new Variant.string ("")).get_string ();
+            search.text = text;
+            query = text.strip ();
+            current = null;
+            rebuild_list ();
+            show_article (null);
+            string key = (d.lookup_value ("article", VariantType.STRING) ?? new Variant.string ("")).get_string ();
+            if (key == "") return;
+            for (uint i = 0; i < model.get_n_items (); i++) {
+                if (((Article) model.get_item (i)).key == key) {
+                    selection.selected = i;
+                    return;
+                }
+            }
+            var a = store.articles[key];
+            if (a == null || !feed_index.has_key (a.feed_id)) return;
             show_article (a);
             rebuild_list ();
         }

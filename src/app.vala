@@ -3,7 +3,7 @@ using Singularity.Widgets;
 
 namespace Singularity.Apps.News {
 
-    public class NewsApp : Singularity.Application {
+    public class NewsApp : Singularity.Application, Singularity.Migration.Migratable {
         public Store store;
         public Refresher refresher;
         public GLib.Settings settings;
@@ -211,14 +211,40 @@ namespace Singularity.Apps.News {
                 return;
             }
             var w = get_active_window ();
-            if (w == null) {
-                var nw = new NewsWindow (this);
-                nw.notify["is-active"].connect (() => {
-                    if (nw.is_active) mark_seen ();
-                });
-                w = nw;
-            }
+            if (w == null) w = adopt (new NewsWindow (this));
             w.present ();
+        }
+
+        private NewsWindow adopt (NewsWindow w) {
+            w.notify["is-active"].connect (() => {
+                if (w.is_active) mark_seen ();
+            });
+            return w;
+        }
+
+        public Variant save_model () {
+            return new VariantDict ().end ();
+        }
+
+        public async void restore_model (Variant model) throws Error {
+        }
+
+        public string window_kind (Gtk.Window w) {
+            return (w is NewsWindow) ? "news" : "";
+        }
+
+        public Variant save_window (Gtk.Window w) {
+            return ((NewsWindow) w).save_migration ();
+        }
+
+        public async Gtk.Window? rebuild_window (string kind, Variant data) throws Error {
+            if (kind != "news") return null;
+            foreach (var old in get_windows ().copy ()) {
+                if (old is NewsWindow) old.destroy ();
+            }
+            var w = adopt (new NewsWindow (this));
+            w.restore_migration (data);
+            return w;
         }
 
         public void open_article (string key) {
