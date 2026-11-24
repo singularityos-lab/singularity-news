@@ -3,7 +3,7 @@ using Singularity.Widgets;
 
 namespace Singularity.Apps.News {
 
-    public class NewsApp : Singularity.Application, Singularity.Migration.Migratable {
+    public class NewsApp : Singularity.Application, Singularity.Migration.Migratable, Singularity.Startup.Bootable {
         public Store store;
         public Refresher refresher;
         public GLib.Settings settings;
@@ -142,7 +142,7 @@ namespace Singularity.Apps.News {
             add_action (open_article_action);
             var add_feed_action = new SimpleAction ("add-feed", null);
             add_feed_action.activate.connect (() => {
-                activate ();
+                show_window ();
                 var w = get_active_window () as NewsWindow;
                 if (w != null) w.add_feed ("");
             });
@@ -204,7 +204,38 @@ namespace Singularity.Apps.News {
             for (int i = 0; i < KEEP_IDS.length; i++) if (KEEP_IDS[i] == keep) store.keep_days = KEEP_DAYS[i];
         }
 
-        public override void activate () {
+        public Singularity.Startup.Plan build_plan (Singularity.Startup.Request request) {
+            var plan = new Singularity.Startup.Plan ();
+            plan.version = "news-1";
+            if (request.kind == Singularity.Startup.RequestKind.SERVICE) {
+                plan.main ("ready", Singularity.Startup.Category.PREPARE, (c) => {})
+                    .reaches (Singularity.Startup.Milestone.SHELL_READY)
+                    .reaches (Singularity.Startup.Milestone.CONTENT_READY)
+                    .reaches (Singularity.Startup.Milestone.INTERACTIVE);
+                return plan;
+            }
+            var shell = plan.main ("window", Singularity.Startup.Category.SHELL, (c) => {
+                show_window ();
+                c.window = get_active_window ();
+            }).reaches (Singularity.Startup.Milestone.SHELL_READY);
+            if (request.kind == Singularity.Startup.RequestKind.OPEN) {
+                var files = request.files ();
+                plan.main ("open-file", Singularity.Startup.Category.CONTENT, (c) => open_files (files))
+                    .depends_on ("window")
+                    .reaches (Singularity.Startup.Milestone.CONTENT_READY)
+                    .reaches (Singularity.Startup.Milestone.INTERACTIVE);
+            } else {
+                shell.reaches (Singularity.Startup.Milestone.CONTENT_READY).reaches (Singularity.Startup.Milestone.INTERACTIVE);
+            }
+            return plan;
+        }
+
+        public void handle_request (Singularity.Startup.Request request) {
+            show_window ();
+            if (request.kind == Singularity.Startup.RequestKind.OPEN) open_files (request.files ());
+        }
+
+        private void show_window () {
             if (add_feed_pending) {
                 add_feed_pending = false;
                 activate_action ("add-feed", null);
@@ -248,13 +279,13 @@ namespace Singularity.Apps.News {
         }
 
         public void open_article (string key) {
-            activate ();
+            show_window ();
             var w = get_active_window () as NewsWindow;
             if (w != null) w.open_article (key);
         }
 
         public void search_articles (string text) {
-            activate ();
+            show_window ();
             var w = get_active_window () as NewsWindow;
             if (w != null) w.search_for (text);
         }
@@ -289,8 +320,7 @@ namespace Singularity.Apps.News {
             }
         }
 
-        public override void open (File[] files, string hint) {
-            activate ();
+        private void open_files (File[] files) {
             var w = get_active_window () as NewsWindow;
             if (w == null) return;
             foreach (var f in files) {
